@@ -15,7 +15,7 @@ app = Flask(__name__)
 
 def predict():
     # get data
-    data = request.get_json(force=True)
+    data = request.get_json(silent=True)
 
     # convert data into dataframe
 
