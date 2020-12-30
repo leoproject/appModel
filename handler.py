@@ -15,17 +15,17 @@ app = Flask(__name__)
 
 def predict():
     # get data
-    data = request.get_json(silent=True)
+    data = request.get_json(force=True)
 
     # convert data into dataframe
 
     #data_df = pd.DataFrame(eval(data))
     data_df = pd.DataFrame.from_dict(data, orient='columns')
     # instanciar a preparação
-    #pipeline = TP2EAC()
-    #data_df = pipeline.data_preparation(data_df)
+    pipeline = TP2EAC()
+    data1 = pipeline.data_preparation(data_df)
     # predictions
-    result = model.predict(data_df)
+    result = model.predict(data1)
     data_df['prediction'] = result
 
     # send back to browser
