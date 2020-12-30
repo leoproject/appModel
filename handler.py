@@ -26,13 +26,13 @@ def predict():
     data1 = pipeline.data_preparation(data_df)
     # predictions
     result = model.predict(data1)
-    data_df['prediction'] = result
+    data1['prediction'] = result
 
     # send back to browser
     output = {'results': int(result[0])}
 
     # return data
-    return jsonify(results=data_df.to_json( orient = 'records'))
+    return jsonify(results=data1.to_json( orient = 'records'))
 
 
 if __name__ == '__main__':
