@@ -20,19 +20,21 @@ def predict():
     # convert data into dataframe
 
     #data_df = pd.DataFrame(eval(data))
-    data_df = pd.DataFrame.from_dict(data, orient='columns')
+    # data_df = pd.DataFrame.from_dict(data, orient='columns')
+    query_df = pd.DataFrame(data)
+    query = pd.get_dummies(query_df)
     # instanciar a preparação
     pipeline = TP2EAC()
-    data1 = pipeline.data_preparation(data_df)
+    data1 = pipeline.data_preparation(query)
     # predictions
     result = model.predict(data1)
-    data_df['prediction'] = result
+    data1['prediction'] = result
 
     # send back to browser
     output = {'results': int(result[0])}
 
     # return data
-    return jsonify(results=data_df.to_json( orient = 'records'))
+    return jsonify(data1.to_json( orient = 'records'))
 
 
 if __name__ == '__main__':
