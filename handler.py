@@ -17,24 +17,23 @@ def predict():
     # get data
     data = request.get_json(force=True)
 
-    # convert data into dataframe
-
-    #data_df = pd.DataFrame(eval(data))
-    # data_df = pd.DataFrame.from_dict(data, orient='columns')
+    # converte data into dataframe
     query_df = pd.DataFrame(data)
     query = pd.get_dummies(query_df)
-    # instanciar a preparação
+
+    # instanciar o pre-processamento dos dados
     pipeline = TP2EAC()
-    data1 = pipeline.data_preparation(query)
+    df_data = pipeline.data_preparation(query)
+    
     # predictions
-    result = model.predict(data1)
-    data1['prediction'] = result
+    result = model.predict(df_data)
+    df_data['prediction'] = result
 
     # send back to browser
     output = {'results': int(result[0])}
 
     # return data
-    return jsonify(data1.to_json( orient = 'records'))
+    return jsonify(df_data.to_json( orient = 'records'))
 
 
 if __name__ == '__main__':
