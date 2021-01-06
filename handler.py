@@ -33,7 +33,7 @@ def predict():
     output = {'results': int(result[0])}
 
     # return data
-    return jsonify(df_data.to_json( orient = 'records'))
+    return df_data.to_json( orient = 'records')
 
 
 if __name__ == '__main__':
